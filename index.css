@@ -2,7 +2,7 @@ body {
     font-family: "Jersey 10", sans-serif;
     background-color: #008080;
     margin: 0;
-    padding: 1vw;
+    /* padding: 1vw; */
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -15,19 +15,24 @@ main {
 }
 
 .main-page-header {
+    padding: 1vw;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    gap: 5%;
 }
-.navigation-links {
-    gap: 9vw;
+/* .navigation-links {
+   
     justify-content: space-evenly;
-}
+} */
 .navigation-links {
     display: flex;
     flex-direction: row;
+    width: 80%;
     justify-content: space-between;
+    font-family: "Silkscreen", sans-serif;
+    font-weight: lighter;
 }
 
 .navigation-link {
@@ -39,6 +44,18 @@ main {
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+.navigation-sign-in {
+    width: 10vw;
+    height: 3vw;
+    font-family: "Silkscreen", sans-serif;
+}
+
+.main-page-footer-start {
+    width: 8vw;
+    height: 2vw;
+    font-family: "Silkscreen", sans-serif;
+}
+
 button {
     display: flex;
     align-items: center;
@@ -48,8 +65,10 @@ button {
 #logo {
     font-family: "Silkscreen", sans-serif;
     display: flex;
+    color: white;
     align-items: center;
 }
+
 
 
 .main-page-sidebar {
@@ -63,13 +82,16 @@ button {
     outline: none;
     display: flex;
     flex-direction: column;
+    color: #fff;
+    font-family: "Silkscreen", sans-serif;
+    width: 60%;
 }
 
 .banner-window {
     background-color: #c3c3c3;
     display:flex;
     flex-direction: column;
-    padding: 1vw;
+    padding: 0.5vw;
     position: absolute;
     width: 62vw;
     height: 73vh;
@@ -93,6 +115,20 @@ button {
     height: 3.5vh;
     width: 3.5vh;
 }
+.window-inner-button {
+    font-family: "Silkscreen", sans-serif;
+
+    height: 3vw;
+    width: 15vw;
+}
+
+.window-inner-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1vh;
+}
+
 .window-header-text {
     color: #fff;
     font-family: "Silkscreen", sans-serif;
@@ -117,6 +153,11 @@ button {
     width: 30vw;
     left: 65vw;
     bottom: 5vh;
+    transition: transform 0.3s ease-in-out;
+}
+
+#large-dog:hover {
+    transform: scale(1.1);
 }
 
 #lightbulb {
@@ -129,16 +170,30 @@ button {
     bottom: 40vh;
 }
 
+.small-title {
+    display: flex;
+    align-items: center;
+}
+
 .window-inner {
+    /* outline: 1px solid #000; */
     display: flex;
     padding: 0.5vw;
+    gap: 1vw;
+    height: 75%;
 
+}
+
+button:active {
+    transform: scale(0.95);
+    background-color: #a9a9a9;
 }
 
 .window-inner-text {
     border: 1px solid gray;
-    padding: 0.5vw;
-
+    padding: 3%;
+    background-color: #fff;
+    width: 55%;
 }
 
 
@@ -162,11 +217,20 @@ button {
     bottom: 0;
     width: 100%;
     position: fixed;
+    height: 4%;
+    align-items: center;
+    gap: 2%;
+    background-color: #c3c3c3;
+
+    padding: 0 1vw;
 }
 .main-page-footer-random-button {
     background-color: transparent;
     outline: none;
     border: none;
-    height: 50px;
-    width: 50px;
+}
+
+.random-small-icon {
+    height: 55px;
+    width: 55px;
 }
