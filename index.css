@@ -1,0 +1,105 @@
+body {
+    font-family: "Jersey 10", sans-serif;
+    background-color: #008080;
+    margin: 0;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main-page-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigation-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navigation-link {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navigation-link:hover {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c3c3c3;
+}
+#logo {
+    font-family: "Silkscreen", sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+
+.main-page-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-page-side-bar-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-window {
+    background-color: #c3c3c3;
+    display:flex;
+    flex-direction: column;
+    padding: 0.5vw;
+    position: absolute;
+    
+}
+
+.banner-window-header {
+    background-color: #3d2480;
+    display: flex;
+
+}
+
+#banner-title {
+    font-family: "Silkscreen", sans-serif;
+}
+
+.large-dawg {
+    position: absolute;
+}
+
+.light-bulb {
+    position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.main-page-footer {
+    display: flex;
+}
