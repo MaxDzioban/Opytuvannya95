@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Raleway:ital,wght@0,100..900;1,100..900&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <script src="index.js" defer></script>
 </head>
 <body>
     <header class="main-page-header">
@@ -29,8 +30,8 @@
             <button class="main-page-side-bar-button"><img class="side-bar-icon" src="./icons/folder.png" alt="Icon"/>Topics</button>
             <button class="main-page-side-bar-button"><img class="side-bar-icon" src="./icons/anecdote.png" alt="Icon"/>Anecdote of the Day</button>
         </aside>
-        <img class="large-dawg" src="./icons/dawg_reading.png" />
-        <img class="lightbulb" src="./icons/lightbulb.png" />
+        <img id="large-dog" src="./icons/dawg_reading.png" />
+        <img id="lightbulb" src="./icons/lightbulb.png" />
         <div class="banner-window">
             <div class="banner-window-header">
                 <h4 class="window-header-text">Welcome</h4>
@@ -40,19 +41,22 @@
                     <button class="close-button"></button>
                 </div>
             </div>
+            
+            <h1 id="banner-title">Welcome to Opytuvannia<span class="highlighted-text">95</span></h1>
             <div class="window-inner">
-                <h1 id="banner-title">Welcome to Opytuvannia<span class="highlighted-text">95</span></h1>
-                <div class="window-inner-text"></div>
+                <div class="window-inner-text">
                     <h4 class="small-title">Did you know...</h4>
                     <p class="generic-text">You can prepare for any survey with Opytuvannya95
                         and get a real assessment of your knowledge!
                     </p>
+
                 </div>
                 <div class="window-inner-buttons">
                     <button class="window-inner-button" id="wib1">Several Topics</button>
                     <button class="window-inner-button" id="wib2">Real Conditions</button>
                     <button class="window-inner-button" id="wib3">Instant Assessment</button>
                 </div>
+            </div>
             </div>
         </div>
 
