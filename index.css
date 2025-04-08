@@ -1,5 +1,6 @@
 body {
     font-family: "Jersey 10", sans-serif;
+    font-size: 1.3vw;
     background-color: #008080;
     margin: 0;
     /* padding: 1vw; */
@@ -22,10 +23,8 @@ main {
     justify-content: space-between;
     gap: 5%;
 }
-/* .navigation-links {
-   
-    justify-content: space-evenly;
-} */
+
+
 .navigation-links {
     display: flex;
     flex-direction: row;
@@ -48,6 +47,8 @@ main {
     width: 10vw;
     height: 3vw;
     font-family: "Silkscreen", sans-serif;
+    position: relative;
+    bottom: 20%;
 }
 
 .main-page-footer-start {
@@ -67,6 +68,8 @@ button {
     display: flex;
     color: white;
     align-items: center;
+    position: relative;
+    bottom: 20%;
 }
 
 
@@ -87,12 +90,15 @@ button {
     width: 60%;
 }
 
-.banner-window {
-    background-color: #c3c3c3;
+.window {
+    background-color: #e0dfe2;
     display:flex;
     flex-direction: column;
     padding: 0.5vw;
     position: absolute;
+    
+}
+.banner {
     width: 62vw;
     height: 73vh;
     top: 50%;
@@ -100,36 +106,39 @@ button {
     transform: translate(-50%, -50%);
 }
 
-.banner-window-header {
+.banner-header {
     background-color: #3d2480;
     display: flex;
     padding: 0 1vw;
     align-items: center;
     justify-content: space-between;
     height: 4vh;
+    margin-bottom: 1vw;
 }
-.window-header-buttons {
+.banner-header-buttons {
     display: flex;
 }
-.window-header-buttons button {
+.banner-header-buttons button {
     height: 3.5vh;
     width: 3.5vh;
 }
-.window-inner-button {
+.banner-inner-button {
     font-family: "Silkscreen", sans-serif;
-
+    background-color: #e0dfe2;
     height: 3vw;
     width: 15vw;
+   
 }
 
-.window-inner-buttons {
+.banner-inner-buttons {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1vh;
+    
 }
 
-.window-header-text {
+.banner-header-text {
     color: #fff;
     font-family: "Silkscreen", sans-serif;
     font-weight: lighter;
@@ -137,7 +146,7 @@ button {
 
 #banner-title {
     font-family: "Silkscreen", sans-serif;
-    font-size: 4.8vw;
+    font-size: 250%;
 }
 
 .highlighted-text {
@@ -146,6 +155,7 @@ button {
 }
 
 #large-dog {
+    -webkit-user-drag: none;
     flex-shrink: 0;
     position: absolute;
     z-index: 1;
@@ -153,14 +163,10 @@ button {
     width: 30vw;
     left: 65vw;
     bottom: 5vh;
-    transition: transform 0.3s ease-in-out;
-}
-
-#large-dog:hover {
-    transform: scale(1.1);
 }
 
 #lightbulb {
+    -webkit-user-drag: none;
     flex-shrink: 0;
     position: absolute;
     z-index: 1;
@@ -175,12 +181,20 @@ button {
     align-items: center;
 }
 
-.window-inner {
-    /* outline: 1px solid #000; */
+.banner-main {
+    outline: 1px solid #000;
     display: flex;
-    padding: 0.5vw;
+    flex-direction: column;
+    padding: 1vw;
+    height: 85%;
+    /* gap: 1vw; */
+}
+
+.banner-inner {
+    display: flex;
+    /* padding: 0.5vw; */
     gap: 1vw;
-    height: 75%;
+    height: 85%;
 
 }
 
@@ -189,7 +203,7 @@ button:active {
     background-color: #a9a9a9;
 }
 
-.window-inner-text {
+.banner-inner-text {
     border: 1px solid gray;
     padding: 3%;
     background-color: #fff;
