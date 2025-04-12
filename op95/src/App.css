@@ -41,6 +41,11 @@ main {
   color: #fff;
 }
 
+.navigation-link:visited {
+  text-decoration: none;
+  color: #fff;
+}
+
 .navigation-link:hover {
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
@@ -98,15 +103,28 @@ button {
   flex-direction: column;
   padding: 0.5vw;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   
 }
-.banner {
+
+.window-control-button img {
+  width: inherit;
+  height: inherit;
+}
+
+.welcome {
   width: 62vw;
   height: 73vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+
+
+
 
 .window-header {
   background-color: #3d2480;
@@ -124,7 +142,7 @@ button {
   height: 3.5vh;
   width: 3.5vh;
 }
-.banner-inner-button {
+.welcome-inner-button {
   font-family: "Silkscreen", sans-serif;
   background-color: #e0dfe2;
   height: 3vw;
@@ -132,7 +150,7 @@ button {
  
 }
 
-.banner-inner-buttons {
+.welcome-inner-buttons {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -146,9 +164,9 @@ button {
   font-weight: lighter;
 }
 
-#banner-title {
+#welcome-title {
   font-family: "Silkscreen", sans-serif;
-  font-size: 250%;
+  font-size: 220%;
 }
 
 .highlighted-text {
@@ -158,24 +176,24 @@ button {
 
 #large-dog {
   -webkit-user-drag: none;
-  flex-shrink: 0;
-  position: absolute;
+  filter: scaleX(-1);
   z-index: 1;
-  height: 52vh;
-  width: 30vw;
-  left: 65vw;
-  bottom: 5vh;
+  width: 20vw;
+  position: absolute;
+  top: 25%;
+  left: 65%;
 }
 
 #lightbulb {
   -webkit-user-drag: none;
   flex-shrink: 0;
-  position: absolute;
   z-index: 1;
-  width: 17vw;
-  height: 27vh;
-  left: 80vw;
-  bottom: 40vh;
+  position: absolute;
+  width: 8vw;
+  top: 10%;
+  left: 80%;
+
+
 }
 
 .small-title {
@@ -183,20 +201,21 @@ button {
   align-items: center;
 }
 
-.banner-main {
+.welcome-main {
   outline: 1px solid #000;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  
   padding: 1vw;
   height: 85%;
   /* gap: 1vw; */
 }
 
-.banner-inner {
+
+
+.welcome-inner {
   display: flex;
-  /* padding: 0.5vw; */
   gap: 1vw;
-  height: 85%;
 
 }
 
@@ -205,13 +224,23 @@ button:active {
   background-color: #a9a9a9;
 }
 
-.banner-inner-text {
+.welcome-inner-text {
   border: 1px solid gray;
   padding: 3%;
   background-color: #fff;
-  width: 55%;
+  width: 90%;
 }
 
+.welcome-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome-image {
+  border: 1px solid gray;
+  padding: 3%;
+
+}
 
 .pop-up {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
