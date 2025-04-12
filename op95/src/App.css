@@ -2,8 +2,6 @@ body {
   font-family: "Jersey 10", sans-serif;
   font-size: 1.3vw;
   background: #008080;
-  background-size: cover, cover;
-  background-blend-mode: overlay;
   margin: 0;
   /* padding: 1vw; */
   display: flex;
@@ -17,6 +15,23 @@ main {
   justify-content: space-between;
 }
 
+a {
+  text-decoration: None;
+  color: inherit;
+}
+
+img {
+  -webkit-user-drag: none;
+}
+
+.pretty-button {
+  width: 7vw;
+  height: 4vh;
+  font-family: 'SilkScreen', sans-serif;
+
+  box-shadow: inset 2px 3px 0 #fff, 2px 2px 3px gray;
+}
+
 .main-page-header {
   padding: 1vw;
   display: flex;
@@ -24,6 +39,8 @@ main {
   align-items: center;
   justify-content: space-between;
   gap: 5%;
+  font-family: "Silkscreen", sans-serif;
+  font-weight: lighter;
 }
 
 
@@ -31,9 +48,8 @@ main {
   display: flex;
   flex-direction: row;
   width: 80%;
+  align-items: center;
   justify-content: space-between;
-  font-family: "Silkscreen", sans-serif;
-  font-weight: lighter;
 }
 
 .navigation-link {
@@ -54,12 +70,13 @@ main {
   width: 10vw;
   height: 3vw;
   font-family: "Silkscreen", sans-serif;
+  font-size: inherit;
   position: relative;
   bottom: 20%;
 }
 
 .main-page-footer-start {
-  width: 8vw;
+  width: 10vw;
   height: 2vw;
   font-family: "Silkscreen", sans-serif;
 }
@@ -69,14 +86,17 @@ button {
   align-items: center;
   justify-content: center;
   background-color: #c3c3c3;
+
+  
 }
+
+
+
 #logo {
   font-family: "Silkscreen", sans-serif;
   display: flex;
   color: white;
   align-items: center;
-  position: relative;
-  bottom: 20%;
 }
 
 
@@ -97,6 +117,12 @@ button {
   width: 60%;
 }
 
+.main-page-side-bar-button:active {
+  background-color: #3d2480;
+  transform: scale(0.95);
+  opacity: 0.5;
+}
+
 .window {
   background-color: #e0dfe2;
   display:flex;
@@ -107,12 +133,27 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 0 10px #000;
+  animation: fadeIn ease-in-out 0.2s;
   
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    background-color: black;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .window-control-button img {
   width: inherit;
   height: inherit;
+}
+
+.window-control-button:active {
+  transform: scale(0.95);
+  filter: brightness(0.8);
 }
 
 .welcome {
@@ -124,13 +165,16 @@ button {
 }
 
 
+.window-text {
+  padding: 1vh 0;
+}
 
 
 
 .window-header {
   background-color: #3d2480;
   display: flex;
-  padding: 0 1vw;
+  padding: 0 0.25vw;
   align-items: center;
   justify-content: space-between;
   height: 4vh;
@@ -139,6 +183,11 @@ button {
 .window-header-buttons {
   display: flex;
 }
+
+.close-button {
+  margin-left: 0.25vw;
+}
+
 .window-header-buttons button {
   height: 3.5vh;
   width: 3.5vh;
@@ -176,7 +225,6 @@ button {
 }
 
 #large-dog {
-  -webkit-user-drag: none;
   filter: scaleX(-1);
   z-index: 1;
   width: 20vw;
@@ -186,7 +234,6 @@ button {
 }
 
 #lightbulb {
-  -webkit-user-drag: none;
   flex-shrink: 0;
   z-index: 1;
   position: absolute;
@@ -203,7 +250,8 @@ button {
 }
 
 .welcome-main {
-  outline: 1px solid #000;
+  /* outline: 1px solid #000; */
+  box-shadow: inset -3px -3px 0px #fff, -3px -3px 0 gray;
   display: grid;
   grid-template-columns: 60% 40%;
   
@@ -220,13 +268,18 @@ button {
 
 }
 
-button:active {
+.pretty-button:active {
   transform: scale(0.95);
   background-color: #a9a9a9;
+  /* opacity: 0.5; */
+
 }
 
+
+
 .welcome-inner-text {
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
+  box-shadow: inset -3px -3px 0px #fff, -3px -3px 0 #c0c0c0;
   padding: 3%;
   background-color: #fff;
   width: 90%;
@@ -238,18 +291,19 @@ button:active {
 }
 
 .welcome-image {
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
+  box-shadow: inset -3px -3px 0px #fff, -3px -3px 0 #c0c0c0;
+  /* box-shadow: 0px 0px 4px #c0c0c0; */
+
   padding: 3%;
 
 }
 
 .pop-up {
+  z-index: 1;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.8);
-  height: 35vh;
+  height: auto;
   width: 30vw;
-  position: absolute;
-  left: calc(50% - 15vw);
-  top: calc(50% - 17.5vh);
 }
 
 .pop-up .generic-text{
@@ -272,6 +326,68 @@ button:active {
 }
 
 
+.window-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+
+
+
+
+
+
+
+.test {
+  height: 97%;
+  width: 99%;
+}
+
+
+.test-main {
+  display: grid;
+  grid-template-columns: 60% 30%;
+  padding: 1%;
+  gap: 10%;
+}
+
+#test-title {
+  font-family: "Silkscreen", sans-serif;
+}
+
+.question {
+  border: 1px solid gray;
+  padding: 1%;
+}
+
+.question-input {
+  width: 99%;
+  height: 20vh;
+  border: none;
+  box-shadow: 0 0 2px gray;
+  resize:none;
+}
+
+
+.test-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+}
+
+.question-list {
+  height: 20vh;
+  box-shadow: 0 0 5px #000;
+}
+
+.timer {
+  height: 15vh;
+  box-shadow: 0 0 5px #000;
+}
+
+.timer-time {
+  text-align: center;
+}
 
 
 
@@ -302,7 +418,12 @@ button:active {
   border: none;
 }
 
+.main-page-footer-start {
+  width: 10vw;
+}
+
 .random-small-icon {
   height: 55px;
   width: 55px;
 }
+
