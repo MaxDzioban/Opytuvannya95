@@ -339,12 +339,14 @@ button {
 
 
 .test {
+  position: fixed;
   height: 97%;
   width: 99%;
 }
 
 
 .test-main {
+  overflow: scroll;
   display: grid;
   grid-template-columns: 60% 30%;
   padding: 1%;
@@ -358,6 +360,7 @@ button {
 .question {
   border: 1px solid gray;
   padding: 1%;
+  margin-bottom: 1%;
 }
 
 .question-input {
@@ -376,6 +379,7 @@ button {
 }
 
 .question-list {
+  
   height: 20vh;
   box-shadow: 0 0 5px #000;
 }

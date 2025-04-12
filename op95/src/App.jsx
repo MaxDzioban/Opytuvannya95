@@ -35,12 +35,38 @@ const WelcomeWindow = () => {
     )
 }
 
-const TestWindow = () => {
+
+const Question = ( {title, text} ) => {
+    // console.log(title + " "  + text)
+    return(
+        <>
+        <div class="question">
+            <h3 class="question-title">{title}</h3>
+            <p class="question-text">{text}</p>
+            <form class="question-form">
+                <textarea class="question-input"></textarea>
+                <button class="question-submit pretty-button">Submit</button>
+            </form>
+            
+        </div>
+        </>
+    )
+}
+
+const GenerateQuestions = ( questions ) => {
+    return (
+        <>
+        {questions.questions.map((q) => <Question title={q.title} text={q.text} />)}
+        </>
+    )
+}
+
+const TestWindow = ( {testName, time, questions} ) => {
     return (
         <>
         <div class="test window">
             <div class="window-header">
-                <h4 class="window-header-text">Test test</h4>
+                <h4 class="window-header-text">{testName}</h4>
                 <div class="window-header-buttons">
                     <button class="minimize-button window-control-button"><img src="/min_window.png"/></button>
                     <button class="maximize-button window-control-button"><img src="/max_window.png"/></button>
@@ -50,16 +76,8 @@ const TestWindow = () => {
             <div class="test-main">
                 <div class="test-left">
                     <h2 id="test-title">This is a test test</h2>
-                    <div class="question">
-                        <h3 class="question-title">1. Your final challenge</h3>
-                        <p class="question-text">32 - 6</p>
-                        <form class="question-form">
-                            <textarea class="question-input"></textarea>
-                            <button class="question-submit pretty-button">Submit</button>
-                        </form>
-                        
-                    </div>
-                    <button id="test-finish" class="pretty-button">Finish Test</button>
+                    <GenerateQuestions questions={questions} />
+                    <button id="test-finish" class="pretty-button"><Link to="/">Finish Test</Link></button>
                 </div>
                 <div class="test-right">
                     <div class="question-list">
@@ -74,7 +92,7 @@ const TestWindow = () => {
                         <div class="window-header">
                             <h4 class="window-header-text">Time left</h4>
                         </div>
-                        <h2 class="timer-time">NONE</h2>
+                        <h2 class="timer-time">{time}:00</h2>
 
                     </div>
                 </div>
@@ -128,6 +146,7 @@ const PopUpWindow = ({ title, text, clickHandler}) => {
 
 const App = () => {
     const [anecdote, setAnecdote] = useState("hide");
+
     return (
         <BrowserRouter>
           <header class="main-page-header">
@@ -157,7 +176,7 @@ const App = () => {
                 <Route path="/about" element={<PopUpWindow title="About Us" text="blablablalbalblbalblalblabllablbalab"/>} />
                 <Route path="/topics" element={<PopUpWindow title="Topics" text="aks os pok"/>} />
                 <Route path="/contacts" element={<PopUpWindow title="Contacts" text="How to contact us:  please don't"/>} />
-                <Route path="/test" element={<TestWindow />}/>
+                <Route path="/test" element={<TestWindow testName="Test test" time="5" questions={[{title: "Question 1", text: "What is static/dynamic branch prediction?"},{title: "Question 2", text: "32 - 26?"}]} />} />
             </Routes>
 
         </div>
