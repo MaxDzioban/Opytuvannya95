@@ -58,8 +58,8 @@ const LogInWindow = () => {
     )
 }
 
-const PopUpWindow = ({ title, text }) => {
-    return (<div class="popup window">
+const PopUpWindow = ({ title, text, zi=0 }) => {
+    return (<div class="popup window" style={{ zIndex: zi }}>
         <div class="window-header">
             <h4 class="window-header-text">{title}</h4>
             <div class="window-header-buttons">
@@ -78,15 +78,16 @@ const PopUpWindow = ({ title, text }) => {
 }
 
 const App = () => {
+    const [anecdote, setAnecdote] = useState("hide");
     return (
         <BrowserRouter>
           <header class="main-page-header">
             <div id="logo"><img class="logo-icon" src="/logoicon.png" alt="Logo"/>OPYTUVANNYA95</div>
             <div class="navigation-links">
-                <a class="navigation-link" href="https://docs.google.com/spreadsheets/d/1NgPsPB_8UHGtAehO79v54FXThUOMtFgLlBrqkL71riA/edit?gid=15096606#gid=15096606"><Link to="/">Home</Link></a>
-                <a class="navigation-link" href="https://docs.google.com/spreadsheets/d/1NgPsPB_8UHGtAehO79v54FXThUOMtFgLlBrqkL71riA/edit?gid=15096606#gid=15096606"><Link to="/about">About Us</Link></a>
-                <a class="navigation-link" href="https://learn.ucu.edu.ua/mod/url/view.php?id=87229"><Link to="/topics">Topics</Link></a>
-                <a class="navigation-link" href="https://docs.google.com/spreadsheets/d/1NgPsPB_8UHGtAehO79v54FXThUOMtFgLlBrqkL71riA/edit?gid=15096606#gid=15096606"><Link to="/contacts">Contacts</Link></a>
+                <a class="navigation-link"><Link to="/">Home</Link></a>
+                <a class="navigation-link"><Link to="/about">About Us</Link></a>
+                <a class="navigation-link"><Link to="/topics">Topics</Link></a>
+                <a class="navigation-link"><Link to="/contacts">Contacts</Link></a>
                 <button class="navigation-sign-in">Sign In</button>
             </div>
         </header>
@@ -96,10 +97,12 @@ const App = () => {
                 <button class="main-page-side-bar-button"><img class="side-bar-icon" src="/computer.png" alt="Icon"/>History</button>
                 <button class="main-page-side-bar-button"><img class="side-bar-icon" src="/recyclebin.png" alt="Icon"/>Recycle Bin</button>
                 <button class="main-page-side-bar-button"><img class="side-bar-icon" src="/folder.png" alt="Icon"/>Topics</button>
-                <button class="main-page-side-bar-button"><img class="side-bar-icon" src="/anecdote.png" alt="Icon"/>Anecdote of the Day</button>
+                <button class="main-page-side-bar-button" onClick={() => setAnecdote("show")}><img class="side-bar-icon" src="/anecdote.png" alt="Icon"/>Anecdote of the Day</button>
             </aside>
         
         <div class="content">
+            {anecdote==="show" &&
+            <PopUpWindow title="Anecdote of the Day" text="Why did the developer go broke?Because he used up all his cache." zi="1" />}
             <Routes>
                 <Route path="/" element={<WelcomeWindow />} />
                 <Route path="/about" element={<PopUpWindow title="About Us" text="blablablalbalblbalblalblabllablbalab"/>} />
