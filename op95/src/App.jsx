@@ -35,6 +35,7 @@ const WelcomeWindow = () => {
     )
 }
 
+// ПРОПСИ БРАТИ В ДУЖКИ ФІГУРНІ ОБОВ'ЯЗКОВО
 
 const Question = ( {title, text} ) => {
     // console.log(title + " "  + text)
@@ -61,12 +62,21 @@ const GenerateQuestions = ( questions ) => {
     )
 }
 
+const GenerateTestButtons = (questionCount) => {
+    const result = [];
+    for (let i = 0; i < questionCount.questionCount; i++) {
+        result.push(<button class="question-button pretty-button">{i+1}</button>);
+    }
+    console.log(result);
+    return result;
+}
+
 const TestWindow = ( {testName, time, questions} ) => {
     return (
         <>
         <div class="test window">
             <div class="window-header">
-                <h4 class="window-header-text">{testName}</h4>
+                <h4 class="window-header-text">Test: {testName}</h4>
                 <div class="window-header-buttons">
                     <button class="minimize-button window-control-button"><img src="/min_window.png"/></button>
                     <button class="maximize-button window-control-button"><img src="/max_window.png"/></button>
@@ -75,7 +85,7 @@ const TestWindow = ( {testName, time, questions} ) => {
             </div>
             <div class="test-main">
                 <div class="test-left">
-                    <h2 id="test-title">This is a test test</h2>
+                    <h2 id="test-title">{testName}</h2>
                     <GenerateQuestions questions={questions} />
                     <button id="test-finish" class="pretty-button"><Link to="/">Finish Test</Link></button>
                 </div>
@@ -85,7 +95,8 @@ const TestWindow = ( {testName, time, questions} ) => {
                         <h4 class="window-header-text">Questions</h4>
                     </div>
                     <div class="question-list-buttons">
-                        {/* ADD BUTTONS FOR QUESTIONS HERE */}
+                        {/* does not work for some reason */}
+                        <GenerateTestButtons questionCount = {2} />
                     </div>
                     </div>
                     <div class="timer">
@@ -103,7 +114,7 @@ const TestWindow = ( {testName, time, questions} ) => {
     )
 }
 
-const LogInWindow = () => {
+const LogInSignUpWindow = ( {clickHandler} ) => {
     return (
     <div class="loginsignup window">
         <div class="window-header">
@@ -118,12 +129,41 @@ const LogInWindow = () => {
             <p>It looks like you are new here...<br/>Please create an account or log into an existing one to save your progress.</p>
         </div>
         <div class="window-buttons">
-            <button class="sign-up pretty-button">Sign up</button>
-            <button class="log-in pretty-button">Log In</button>
+            <button class="sign-up pretty-button" onClick={clickHandler}>Sign up</button>
+            <button class="log-in pretty-button" onClick={clickHandler}>Log In</button>
         </div>
     </div>
     )
 }
+
+
+const CreateAccountWindow = ( {loginHandler} ) => {
+    return (
+        <div class="create-account window">
+        <div class="window-header">
+            <h4 class="window-header-text">hmmmm</h4>
+            <div class="window-header-buttons">
+                <button class="minimize-button window-control-button"><img src="/min_window.png"/></button>
+                <button class="maximize-button window-control-button"><img src="/max_window.png"/></button>
+                <button class="close-button window-control-button"><img src="/close_window.png"/></button>
+            </div>
+        </div>
+        <div class="window-text">
+            <p class="window-text">Type a username and password to log in.</p>
+            <form id="create-account-form">
+                <p class="window-text">Username:</p>
+                <input id="form-username" type="text"></input>
+                <p class="window-text">Password:</p>
+                <input id="form-password" type="password"></input>
+            </form>
+        </div>
+        <div class="window-buttons">
+            <button class="confirmAccount pretty-button" onClick={loginHandler}>Confirm</button>
+        </div>
+    </div>
+    )
+}
+
 
 const PopUpWindow = ({ title, text, clickHandler}) => {
     return (<div class="pop-up window">
@@ -146,7 +186,12 @@ const PopUpWindow = ({ title, text, clickHandler}) => {
 
 const App = () => {
     const [anecdote, setAnecdote] = useState("hide");
+    // PLACEHOLDER, REPLACE WITH ACTUAL LOGIN LATER
+    const [showLogInWindow, setShowLogInWindow] = useState("false") // це дуже погано і я потім зроблю норм
+    const [loggedin, setLoggedin] = useState("false");
 
+    const [username, setUsername] = useState("");
+    // 
     return (
         <BrowserRouter>
           <header class="main-page-header">
@@ -156,7 +201,8 @@ const App = () => {
                 <a class="navigation-link"><Link to="/about">About Us</Link></a>
                 <a class="navigation-link"><Link to="/topics">Topics</Link></a>
                 <a class="navigation-link"><Link to="/contacts">Contacts</Link></a>
-                <button class="navigation-sign-in pretty-button">Sign In</button>
+
+                {(loggedin==="true" && <p>{username}</p> )|| <button class="navigation-sign-in pretty-button">Sign In</button>}
             </div>
         </header>
         <main>
@@ -169,14 +215,26 @@ const App = () => {
             </aside>
         
         <div class="content">
+            {/* якщо це розкоментувати то буде типу симуляція логіну */}
+{/*                 
+            {loggedin==="false" &&
+            <LogInSignUpWindow clickHandler={() => {setShowLogInWindow("true")}}/>} */}
+
+            {showLogInWindow==="true" &&
+            <CreateAccountWindow loginHandler={() => {setUsername(document.getElementById("form-username").value);
+                                                      setLoggedin("true");
+                                                      setShowLogInWindow("false")
+            }} />}
+
+
             {anecdote==="show" &&
-            <PopUpWindow title="Anecdote of the Day" text="Why did the developer go broke?Because he used up all his cache." clickHandler={() => setAnecdote("hide")} />}
+            <PopUpWindow title="Anecdote of the Day" text="Why did the developer go broke? Because he used up all his cache." clickHandler={() => setAnecdote("hide")} />}
             <Routes>
                 <Route path="/" element={<WelcomeWindow />} />
                 <Route path="/about" element={<PopUpWindow title="About Us" text="blablablalbalblbalblalblabllablbalab"/>} />
                 <Route path="/topics" element={<PopUpWindow title="Topics" text="aks os pok"/>} />
                 <Route path="/contacts" element={<PopUpWindow title="Contacts" text="How to contact us:  please don't"/>} />
-                <Route path="/test" element={<TestWindow testName="Test test" time="5" questions={[{title: "Question 1", text: "What is static/dynamic branch prediction?"},{title: "Question 2", text: "32 - 26?"}]} />} />
+                <Route path="/test" element={<TestWindow testName="AKS Final Exam" time={5} questions={[{title: "Question 1", text: "What is static/dynamic branch prediction?"},{title: "Question 2", text: "32 - 26?"}]} />} />
             </Routes>
 
         </div>

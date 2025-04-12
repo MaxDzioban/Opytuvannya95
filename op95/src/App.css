@@ -25,6 +25,7 @@ img {
 }
 
 .pretty-button {
+  border: none;
   width: 7vw;
   height: 4vh;
   font-family: 'SilkScreen', sans-serif;
@@ -311,14 +312,14 @@ button {
   text-align: center;
 }
 
-.window-action-buttons {
+.window-buttons {
   display: flex;
   flex-direction: row;
-  gap: 10%;
-  justify-content: center;
+  gap: 1%;
+  justify-content: flex-end;
 }
 
-.window-action-button {
+.window-button {
   background-color: #c0c0c0;
   font-family: "Silkscreen", sans-serif;
   width: 25%;
@@ -326,14 +327,12 @@ button {
 }
 
 
-.window-buttons {
-  display: flex;
-  justify-content: space-around;
+
+
+
+.create-account {
+  z-index: 2;
 }
-
-
-
-
 
 
 
@@ -392,6 +391,23 @@ button {
 .timer-time {
   text-align: center;
 }
+
+
+
+
+
+
+
+.loginsignup {
+  z-index: 1;
+}
+
+
+
+
+
+
+
 
 
 
