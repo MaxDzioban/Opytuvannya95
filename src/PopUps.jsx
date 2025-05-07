@@ -56,23 +56,23 @@ export const CreateAccountWindow = ( {loginHandler} ) => {
 export const PopUpWindow = ({ isOpen=true, title, text, clickHandler}) => {
     // fix this transition please...
     return (
-    <Transition in={isOpen} timeout={350} unmountOnExit={true}>
+    <Transition in={isOpen} timeout={500} unmountOnExit={true}>
         {(state) =>
             <div className={`window--${state}`}>
             <div className={`pop-up window`}>
-                <div class="window-header">
-                    <h4 class="window-header-text">{title}</h4>
-                    <div class="window-header-buttons">
-                        <button class="minimize-button window-control-button"><img src="/min_window.png"/></button>
-                        <button class="maximize-button window-control-button"><img src="/max_window.png"/></button>
-                        <button class="close-button window-control-button"><img src="/close_window.png"/></button>
+                <div className="window-header">
+                    <h4 className="window-header-text">{title}</h4>
+                    <div className="window-header-buttons">
+                        <button className="minimize-button window-control-button"><img src="/min_window.png"/></button>
+                        <button className="maximize-button window-control-button"><img src="/max_window.png"/></button>
+                        <button className="close-button window-control-button"><img src="/close_window.png"/></button>
                     </div>
                 </div>
-                <div class="window-text">
+                <div className="window-text">
                     {text}
                 </div>
-                <div class="window-buttons">
-                    <button class="ok_button pretty-button" onClick={clickHandler}>OK</button>
+                <div className="window-buttons">
+                    <button className="ok_button pretty-button" onClick={clickHandler}>OK</button>
                 </div>
             </div>
         </div>}

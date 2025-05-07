@@ -1,16 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Timer } from "./Timer.jsx";
 
-export const Question = ( {title, text} ) => {
-    // console.log(title + " "  + text)
+export const Question = ( {title, text, index} ) => {
     return(
         <>
-        <div class="question">
-            <h3 class="question-title">{title}</h3>
-            <p class="question-text">{text}</p>
-            <form class="question-form">
-                <textarea class="question-input"></textarea>
+        <div className="question" id={`question-${index}`}>
+            <h3 className="question-title">{title}</h3>
+            <p className="question-text">{text}</p>
+            <form className="question-form">
+                <textarea className="question-input"></textarea>
             </form>
             
         </div>
@@ -18,21 +17,20 @@ export const Question = ( {title, text} ) => {
     )
 }
 
-export const GenerateQuestions = ( questions ) => {
+export const GenerateQuestions = ({ questions }) => {
     let i = 1
     return (
         <>
-        {questions.questions.map((q) => <Question title={"Question " + i++} text={q} />)}
+        {questions.map((q) => <Question title={"Question " + i++} text={q} index={i-2} />)}
         </>
     )
 }
 
-export const GenerateTestButtons = (questionCount) => {
+export const GenerateTestButtons = ({ questionCount }) => {
     const result = [];
     for (let i = 0; i < questionCount; i++) {
-        result.push(<button class="question-button pretty-button">{i+1}</button>);
+        result.push(<button class="question-button pretty-button" onClick={() => document.getElementById("question-"+i).scrollIntoView({ behavior: 'smooth', block: 'center' })}>{i+1}</button>);
     }
-    // console.log(result);
     return result;
 }
 
@@ -74,8 +72,7 @@ export const TestWindow = ( {testName, time, questions} ) => {
                         <h4 class="window-header-text">Questions</h4>
                     </div>
                     <div class="question-list-buttons">
-                        {/* does not work for some reason */}
-                        <GenerateTestButtons questionCount = {2} />
+                        <GenerateTestButtons questionCount = {questions.length} />
                     </div>
                     </div>
                     <Timer timeInMins={time} onComplete={finishHandler} />
@@ -88,37 +85,47 @@ export const TestWindow = ( {testName, time, questions} ) => {
 }
 
 export const ResultsWindow = ({topic, questions, answers}) => {
-    let final_score = 0;
+    const [finalScore, setFinalScore] = useState(0);
 
-    async function submitAnswer(i, question, answer) {
-        console.log(JSON.stringify({ question, answer }));
-        const res = await fetch("http://localhost:3000/api/evaluate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ question, answer })
-        });
+    useEffect(() => {
+        async function evaluateAnswers() {
+            let total = 0
 
-        const data = await res.json();
-        final_score += data["score"];
-        const newRow = document.createElement("tr");
+            for (let i = 0; i < questions.length; i++) {
+                const question = questions[i];
+                const answer = answers[i];
 
-        for (let element of [document.createTextNode(i+1), 
-                             document.createTextNode(data["score"]),
-                             document.createTextNode(answer),
-                             document.createTextNode(data["comment"])
-        ]) {
-            const newCell = document.createElement("td");
-            newCell.append(element);
-            newRow.append(newCell);
+                const res = await fetch("http://localhost:3000/api/evaluate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ question, answer })
+                });
+
+                const data = await res.json();
+                total += data["score"];
+                
+                const newRow = document.createElement("tr");
+
+                for (let element of [document.createTextNode(i+1), 
+                                    document.createTextNode(data["score"]),
+                                    document.createTextNode(answer),
+                                    document.createTextNode(data["comment"])
+                ]) {
+                    const newCell = document.createElement("td");
+                    newCell.append(element);
+                    newRow.append(newCell);
+                }
+
+                document.getElementById("responses-body").appendChild(newRow);
+
+            }
+            setFinalScore(total);
         }
+        evaluateAnswers();
+    }, [questions, answers]);
 
-        document.getElementById("responses-body").appendChild(newRow);
-
-
-    }
-    for (let i = 0; i < questions.length; i++) {
-        submitAnswer(i, questions[i], answers[i]);
-    }
+    
+    
     
     return (
         <>
@@ -131,7 +138,7 @@ export const ResultsWindow = ({topic, questions, answers}) => {
                     <Link to="/"><button class="close-button window-control-button"><img src="/close_window.png"/></button></Link>
                 </div>
             </div>
-            <h2>Your score: <span id="test-score">...</span></h2>
+            <h2>Your score: <span id="test-score">{finalScore || "calculating..."}</span></h2>
             <table id="responses">
                 <thead>
                     <tr>

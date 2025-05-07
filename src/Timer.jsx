@@ -28,9 +28,14 @@ export const Timer = ({ timeInMins, onComplete }) => {
 
     return (
         <div className='timer'>
+            <div className="window-header">
+                <h4 class="window-header-text">Time Left:</h4>
+            </div>
+            <h2 className="timer-text">
             <span className="timer-hours">{hours}</span>:
             <span className="timer-minutes">{minutes}</span>:
             <span className="timer-seconds">{seconds}</span>
+            </h2>
 
         </div>
     );

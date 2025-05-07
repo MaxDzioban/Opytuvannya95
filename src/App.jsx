@@ -5,17 +5,23 @@ import './App.css';
 import { WelcomeWindow } from "./WelcomeWindow.jsx";
 import { LogInSignUpWindow, CreateAccountWindow, PopUpWindow } from "./PopUps.jsx";
 import { SelectTestWindow, TestWindow } from "./Test.jsx";
+import { NotepadWindow } from './Notepad.jsx';
 
 
 
 
 const App = () => {
     const [anecdoteIsOpen, setAnecdote] = useState("hide");
+
+
     // PLACEHOLDER, REPLACE WITH ACTUAL LOGIN LATER
     const [LogInWindowIsOpen, setLogInWindow] = useState("false") // це дуже погано і я потім зроблю норм
     const [loggedin, setLoggedin] = useState("false");
 
     const [username, setUsername] = useState("");
+
+    const [openWindows, setOpenWindows] = useState(["Home"]);
+
     // 
     return (
         <BrowserRouter>
@@ -41,8 +47,8 @@ const App = () => {
         
         <div className="content">
             {/* якщо це розкоментувати то буде типу симуляція логіну */}
-{/*                 
-            {loggedin==="false" &&
+                
+            {/* {loggedin==="false" &&
             <LogInSignUpWindow clickHandler={() => {setLogInWindow("true")}}/>} */}
 
             {LogInWindowIsOpen==="true" &&
@@ -53,12 +59,47 @@ const App = () => {
 
 
             {anecdoteIsOpen==="show" &&
-            <PopUpWindow isOpen={anecdoteIsOpen} title="Anecdote of the Day" text="Why did the developer go broke? Because he used up all his cache." clickHandler={() => setAnecdote("hide")} />}
+            <PopUpWindow isOpen={anecdoteIsOpen} title="Anecdote of the Day" text={"Placeholder anecdote"} clickHandler={() => setAnecdote("hide")} />}
             <Routes>
                 <Route path="/" element={<WelcomeWindow />} />
-                <Route path="/about" element={<PopUpWindow title="About Us" text="blablablalbalblbalblalblabllablbalab"/>} />
-                <Route path="/topics" element={<PopUpWindow title="Topics" text="aks os pok"/>} />
-                <Route path="/contacts" element={<PopUpWindow title="Contacts" text="How to contact us:  please don't"/>} />
+                <Route path="/about" element={<NotepadWindow title="About Us" content="      ------------------------------------------------      
+                                                     ABOUT US
+      ------------------------------------------------   
+   Hello! We are aspiring web developers from UCU :+)
+
+   This tool was designed to make your test preparations easy and fun.
+   
+   Important: This tool uses AI for evaluating your answers, and we are
+   not responsible for any errors or inappropriate behaviour.
+   This is a demo version of the tool, may contain bugs.
+
+   Have fun!
+   
+
+
+
+
+   
+   ▒▒▄▀▀▀▀▀▄▒▒▒▒▒▄▄▄▄▄▒▒▒
+   ▒▐░▄░░░▄░▌▒▒▄█▄█▄█▄█▄▒
+   ▒▐░▀▀░▀▀░▌▒▒▒▒▒░░░▒▒▒▒
+   ▒▒▀▄░═░▄▀▒▒▒▒▒▒░░░▒▒▒▒
+   ▒▒▐░▀▄▀░▌▒▒▒▒▒▒░░░▒▒▒▒
+"/>} />
+                <Route path="/topics" element={<NotepadWindow title="Topics" content="      ------------------------------------------------      
+                                                       TOPICS
+      ------------------------------------------------      
+   Architecture of Computer Systems (Ukrainian)
+                 - Out-of-order, Pipeline, Microarchitecture
+                 - Пам'ять: DRAM, SRAM, архітектура
+                 - ISA, SIMD, архітектури машин
+                 - Паралельні обчислення, архітектури систем
+                 - Кеш пам'ять
+                 - Паралельне програмування"/>} />
+                <Route path="/contacts" element={<NotepadWindow title="Contacts" content="      ------------------------------------------------      
+                                           HOW TO CONTACT US
+      ------------------------------------------------   
+   Please don't"/>} />
                 <Route path="/test" element={<SelectTestWindow clickHandler={(title) => console.log(title)}/>} />
             </Routes>
 
@@ -66,11 +107,9 @@ const App = () => {
         </main>
         <footer className="main-page-footer">
             <Link to="/test"><button className="main-page-footer-start pretty-button"><img className="start-icon" src="/bomba.png"/>Start Test</button></Link>
-            <button className="main-page-footer-random-button"><img className="random-small-icon" src="/anothercomputer.png" /></button>
-            <button className="main-page-footer-random-button"><img className="random-small-icon" src="/computer.png" /></button>
-            <button className="main-page-footer-random-button"><img className="random-small-icon" src="/recyclebin.png" /></button>
-            <button className="main-page-footer-random-button"><img className="random-small-icon" src="/folder.png" /></button>
-            <button className="main-page-footer-random-button"><img className="random-small-icon" src="/anecdote.png" /></button>
+            {openWindows.map((item,index) => (
+                <button className="main-page-footer-random-button">{item}</button>
+            ))}
         </footer>
         </BrowserRouter>
       )
