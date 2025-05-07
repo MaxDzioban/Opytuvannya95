@@ -159,6 +159,7 @@ export const ResultsWindow = ({topic, questions, answers}) => {
 }
 
 
+
 export const SelectTestWindow = ( {clickHandler} ) => {
     // fetch all questions
     // OPTIMIZE MAYBE? TODO
@@ -166,7 +167,6 @@ export const SelectTestWindow = ( {clickHandler} ) => {
     const [topicQuestions, setTopicQuestions] = useState({});
     const [selectedIndices, setIndices] = useState(new Set());
 
-    // not async so that all questions are loaded in the beginning
     // TODO: add loading logic
     async function loadAllQuestions() {
         try {

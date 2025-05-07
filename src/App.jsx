@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Link } from 'react-router-dom';
 import './App.css';
@@ -6,23 +6,24 @@ import { WelcomeWindow } from "./WelcomeWindow.jsx";
 import { LogInSignUpWindow, CreateAccountWindow, PopUpWindow } from "./PopUps.jsx";
 import { SelectTestWindow, TestWindow } from "./Test.jsx";
 import { NotepadWindow } from './Notepad.jsx';
-
+import { UserIcon } from "./UserStuff.jsx"
 
 
 
 const App = () => {
-    const [anecdoteIsOpen, setAnecdote] = useState("hide");
+    const [anecdoteIsOpen, setAnecdoteIsOpen] = useState("hide");
+ 
+    
 
-
-    // PLACEHOLDER, REPLACE WITH ACTUAL LOGIN LATER
+    // TODO: implement Login System
     const [LogInWindowIsOpen, setLogInWindow] = useState("false") // це дуже погано і я потім зроблю норм
     const [loggedin, setLoggedin] = useState("false");
 
     const [username, setUsername] = useState("");
 
+    // TODO: fix the window logic or remove
     const [openWindows, setOpenWindows] = useState(["Home"]);
 
-    // 
     return (
         <BrowserRouter>
           <header className="main-page-header">
@@ -33,7 +34,7 @@ const App = () => {
                 <Link className="navigation-link" to="/topics">Topics</Link>
                 <Link className="navigation-link" to="/contacts">Contacts</Link>
 
-                {(loggedin==="true" && <p>{username}</p> )|| <button className="navigation-sign-in pretty-button">Sign In</button>}
+                {(loggedin==="true" && <UserIcon username={username} /> )|| <button className="navigation-sign-in pretty-button">Sign In</button>}
             </div>
         </header>
         <main>
@@ -42,7 +43,7 @@ const App = () => {
                 <button className="main-page-side-bar-button"><img className="side-bar-icon" src="/computer.png" alt="Icon"/>Statistics</button>
                 <button className="main-page-side-bar-button"><img className="side-bar-icon" src="/recyclebin.png" alt="Icon"/>Recycle Bin</button>
                 <button className="main-page-side-bar-button"><img className="side-bar-icon" src="/folder.png" alt="Icon"/>Topics</button>
-                <button className="main-page-side-bar-button" onClick={() => setAnecdote("show")}><img className="side-bar-icon" src="/anecdote.png" alt="Icon"/>Anecdote of the Day</button>
+                <button className="main-page-side-bar-button" onClick={() => setAnecdoteIsOpen("show")}><img className="side-bar-icon" src="/anecdote.png" alt="Icon"/>Anecdote of the Day</button>
             </aside>
         
         <div className="content">
@@ -59,7 +60,7 @@ const App = () => {
 
 
             {anecdoteIsOpen==="show" &&
-            <PopUpWindow isOpen={anecdoteIsOpen} title="Anecdote of the Day" text={"Placeholder anecdote"} clickHandler={() => setAnecdote("hide")} />}
+            <PopUpWindow isOpen={anecdoteIsOpen} title="Anecdote of the Day" text={"There are only 10 kinds of people in this world: those who know binary and those who don't."} clickHandler={() => setAnecdoteIsOpen("hide")} />}
             <Routes>
                 <Route path="/" element={<WelcomeWindow />} />
                 <Route path="/about" element={<NotepadWindow title="About Us" content="      ------------------------------------------------      
