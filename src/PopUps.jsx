@@ -1,81 +1,32 @@
-import { useState } from 'react'
-import { Transition } from "react-transition-group"
-
-
-export const LogInSignUpWindow = ( {clickHandler} ) => {
+import React from "react";
+export const WelcomeWindow = () => {
     return (
-    <div class="loginsignup window">
-        <div class="window-header">
-            <h4 class="window-header-text">Hello</h4>
-            <div class="window-header-buttons">
-                <button class="minimize-button window-control-button"><img src="/min_window.png"/></button>
-                <button class="maximize-button window-control-button"><img src="/max_window.png"/></button>
-                <button class="close-button window-control-button"><img src="/close_window.png"/></button>
+        <>
+        <div className="welcome window">
+            <div className="window-header">
+                <h4 className="window-header-text">Home</h4>
+                <div className="window-header-buttons">
+                    <button className="minimize-button window-control-button"><img src="/min_window.png"/></button>
+                    <button className="maximize-button window-control-button"><img src="/max_window.png"/></button>
+                    <button className="close-button window-control-button"><img src="/close_window.png"/></button>
+                </div>
             </div>
-        </div>
-        <div class="window-text">
-            <p>It looks like you are new here...<br/>Please create an account or log into an existing one to save your progress.</p>
-        </div>
-        <div class="window-buttons">
-            <button class="sign-up pretty-button" onClick={clickHandler}>Sign up</button>
-            <button class="log-in pretty-button" onClick={clickHandler}>Log In</button>
-        </div>
-    </div>
-    )
-}
-
-
-export const CreateAccountWindow = ( {loginHandler} ) => {
-    return (
-        <div class="create-account window">
-        <div class="window-header">
-            <h4 class="window-header-text">hmmmm</h4>
-            <div class="window-header-buttons">
-                <button class="minimize-button window-control-button"><img src="/min_window.png"/></button>
-                <button class="maximize-button window-control-button"><img src="/max_window.png"/></button>
-                <button class="close-button window-control-button"><img src="/close_window.png"/></button>
-            </div>
-        </div>
-        <div class="window-text">
-            <p class="window-text">Type a username and password to log in.</p>
-            <form id="create-account-form">
-                <p class="window-text">Username:</p>
-                <input id="form-username" type="text"></input>
-                <p class="window-text">Password:</p>
-                <input id="form-password" type="password"></input>
-            </form>
-        </div>
-        <div class="window-buttons">
-            <button class="confirmAccount pretty-button" onClick={loginHandler}>Confirm</button>
-        </div>
-    </div>
-    )
-}
-
-
-export const PopUpWindow = ({ isOpen=true, title, text, clickHandler}) => {
-    // fix this transition please...
-    return (
-    <Transition in={isOpen} timeout={500} unmountOnExit={true}>
-        {(state) =>
-            <div className={`window--${state}`}>
-            <div className={`pop-up window`}>
-                <div className="window-header">
-                    <h4 className="window-header-text">{title}</h4>
-                    <div className="window-header-buttons">
-                        <button className="minimize-button window-control-button"><img src="/min_window.png"/></button>
-                        <button className="maximize-button window-control-button"><img src="/max_window.png"/></button>
-                        <button className="close-button window-control-button"><img src="/close_window.png"/></button>
+            <div className="welcome-main">
+                <div className="welcome-main-side">
+                    <h1 id="welcome-title">Welcome to Opytuvannia<span className="highlighted-text">95</span></h1>
+                        <div className="welcome-inner-text">
+                            <h4 className="small-title"><img src="/info.png" />Did you know...</h4>
+                            <p className="generic-text">You can prepare for any test with Opytuvannya95
+                                and get a real assessment of your knowledge!
+                            </p>
+                        </div>
+                    </div>
+                    <div className="welcome-image">
+                        <img id="large-dog" src="/dog_reading.png" />
+                        <img id="lightbulb" src="/lightbulb.png" />
                     </div>
                 </div>
-                <div className="window-text">
-                    {text}
-                </div>
-                <div className="window-buttons">
-                    <button className="ok_button pretty-button" onClick={clickHandler}>OK</button>
-                </div>
             </div>
-        </div>}
-    </Transition>
+        </>
     )
 }
