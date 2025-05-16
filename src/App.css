@@ -745,3 +745,11 @@ input:focus {
   70% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+
+#responses {
+  max-height: 400px;
+  overflow-y: auto;
+  display: block;
+  border: 1px solid #888;
+}
