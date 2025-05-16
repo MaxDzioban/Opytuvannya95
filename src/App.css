@@ -696,3 +696,52 @@ input:focus {
   width: 55px;
 }
 
+.topics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.topic-button {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  white-space: normal;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.scrollable-topic-content {
+  max-height: 300px; /* або 50vh */
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.scrollable-topic-content ul {
+  padding-left: 18px;
+}
+
+.scrollable-topic-content li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+
+.blood-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(150, 0, 0, 0.6);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
