@@ -15,7 +15,7 @@ const SplitText = ({ text }) => {
 
 export const NotepadWindow = ({ title, content, clickHandler }) => {
     console.log(content);
-    return (
+    return ( 
                 <div className={`notepad window`}>
                     <div className="window-header">
                         <h4 className="window-header-text">{title}</h4>
