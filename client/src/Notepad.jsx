@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SplitText = ({ text }) => (
   <div>
@@ -14,13 +14,15 @@ const SplitText = ({ text }) => (
 
 export const NotepadWindow = ({ title, content, clickHandler }) => {
   const [openMenuWindow, setOpenMenuWindow] = useState(null);
-
   const MenuWindow = ({ title, text, onClose }) => (
     <div className="menu-window window">
       <div className="window-header">
         <h4 className="window-header-text">{title}</h4>
         <div className="window-header-buttons">
-          <button className="close-button window-control-button" onClick={onClose}>
+          <button
+            className="close-button window-control-button"
+            onClick={onClose}
+          >
             <img src="/close_window.png" alt="Close" />
           </button>
         </div>
@@ -46,10 +48,18 @@ export const NotepadWindow = ({ title, content, clickHandler }) => {
         </div>
 
         <div className="notepad-header">
-          <p onClick={() => setOpenMenuWindow("File")}><span className="underline">F</span>ile</p>
-          <p onClick={() => setOpenMenuWindow("Edit")}><span className="underline">E</span>dit</p>
-          <p onClick={() => setOpenMenuWindow("Search")}><span className="underline">S</span>earch</p>
-          <p onClick={() => setOpenMenuWindow("Help")}><span className="underline">H</span>elp</p>
+          <p onClick={() => setOpenMenuWindow("File")}>
+            <span className="underline">F</span>ile
+          </p>
+          <p onClick={() => setOpenMenuWindow("Edit")}>
+            <span className="underline">E</span>dit
+          </p>
+          <p onClick={() => setOpenMenuWindow("Search")}>
+            <span className="underline">S</span>earch
+          </p>
+          <p onClick={() => setOpenMenuWindow("Help")}>
+            <span className="underline">H</span>elp
+          </p>
         </div>
 
         <div className="notepad-inner">
@@ -60,20 +70,19 @@ export const NotepadWindow = ({ title, content, clickHandler }) => {
       </div>
 
       {openMenuWindow && (
-  <MenuWindow
-    title={openMenuWindow}
-    text={
-      {
-        File: `🗂 Welcome to the File Menu!\n\nHere you could open, save, or even lose your precious work (just like in the 90s). But for now... it's just vibes.`,
-        Edit: `✏️ Edit Menu Loaded!\n\nImagine cutting, copying, and pasting. Now imagine none of that actually works here.`,
-        Search: `🔍 Search Activated!\n\nLooking for answers? So are we. Unfortunately, this search only finds existential dread.`,
-        Help: `💡 Need Help?\n\nTry turning it off and on again.\nStill broken? We’re not responsible.\nGood luck! 🍀`,
-      }[openMenuWindow] || "Unknown menu..."
-    }
-    onClose={() => setOpenMenuWindow(null)}
-  />
-)}
-
+        <MenuWindow
+          title={openMenuWindow}
+          text={
+            {
+              File: `🗂 Welcome to the File Menu!\n\nHere you could open, save, or even lose your precious work (just like in the 90s). But for now... it's just vibes.`,
+              Edit: `✏️ Edit Menu Loaded!\n\nImagine cutting, copying, and pasting. Now imagine none of that actually works here.`,
+              Search: `🔍 Search Activated!\n\nLooking for answers? So are we. Unfortunately, this search only finds existential dread.`,
+              Help: `💡 Need Help?\n\nTry turning it off and on again.\nStill broken? We’re not responsible.\nGood luck! 🍀`,
+            }[openMenuWindow] || "Unknown menu..."
+          }
+          onClose={() => setOpenMenuWindow(null)}
+        />
+      )}
     </>
   );
 };
