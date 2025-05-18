@@ -49,10 +49,10 @@ const App = () => {
         console.error("Помилка завантаження питань:", err);
       }
     };
-  
+
     fetchQuestions();
   }, []);
-  
+
   const [showWelcome, setShowWelcome] = useState(true);
   // useEffect(() => {
   //   const show = localStorage.getItem("showWelcome");
@@ -90,8 +90,7 @@ const App = () => {
   useEffect(() => {
     if (settingsActive) {
       document.body.classList.add("settings-mode");
-    }
-    else {
+    } else {
       document.body.classList.remove("settings-mode");
     }
   }, [settingsActive]);
@@ -108,7 +107,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-{/*       {bloodOverlayActive && <div className="blood-overlay"></div>} */}
+      {/*       {bloodOverlayActive && <div className="blood-overlay"></div>} */}
       <header className="main-page-header">
         <div id="logo">
           <img className="logo-icon" src="/logoicon.png" alt="Logo" />
@@ -166,7 +165,7 @@ const App = () => {
         <aside className="main-page-side-bar">
           <button
             className="main-page-side-bar-button"
-            onClick={() => setSettingsActive(sa => !sa)}
+            onClick={() => setSettingsActive((sa) => !sa)}
           >
             <img
               className="side-bar-icon"
@@ -222,7 +221,6 @@ const App = () => {
             Topics
           </button>
 
-
           <button
             className="main-page-side-bar-button"
             onClick={() => {
@@ -271,9 +269,9 @@ const App = () => {
 
                   const endpoint = isLoginMode ? "login" : "register";
                   const baseUrl = import.meta.env.PROD
-  ? "" // <- автоматично підставиться Heroku origin
-  : "http://localhost:56692";
-                  
+                    ? "" // <- автоматично підставиться Heroku origin
+                    : "http://localhost:56692";
+
                   const response = await fetch(
                     // `http://localhost:3000/api/${endpoint}`,
                     `/api/${endpoint}`,
@@ -433,7 +431,6 @@ const App = () => {
         </div>
       </main>
 
-      
       <footer className="main-page-footer">
         <Link to="/test">
           <button
@@ -445,7 +442,7 @@ const App = () => {
               }
             }}
           >
-            <img className="start-icon" src="/bomba.png" alt="bomb"/>
+            <img className="start-icon" src="/bomba.png" alt="bomb" />
             Start Test
           </button>
         </Link>
@@ -455,4 +452,3 @@ const App = () => {
 };
 
 export default App;
-
