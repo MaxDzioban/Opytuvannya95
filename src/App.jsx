@@ -50,10 +50,18 @@ const App = () => {
   }, []);
 
   // скрімери
-  const [bloodOverlayActive, setBloodOverlayActive] = useState(false);
+  const [settingsActive, setSettingsActive] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [points, setPoints] = useState(null);
 
+  useEffect(() => {
+    if (settingsActive) {
+      document.body.classList.add("settings-mode");
+    }
+    else {
+      document.body.classList.remove("settings-mode");
+    }
+  }, [settingsActive]);
 
   const [topicsPopUpIsOpen, setTopicsPopUpIsOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState(null);
@@ -68,7 +76,6 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {bloodOverlayActive && <div className="blood-overlay"></div>}
       <header className="main-page-header">
         <div id="logo">
           <img className="logo-icon" src="/logoicon.png" alt="Logo" />
@@ -115,10 +122,7 @@ const App = () => {
         <aside className="main-page-side-bar">
           <button
             className="main-page-side-bar-button"
-            onClick={() => {
-              setBloodOverlayActive(true);
-              setTimeout(() => setBloodOverlayActive(false), 4000); // зникає через 4 секунди
-            }}
+            onClick={() => setSettingsActive(sa => !sa)}
           >
             <img
               className="side-bar-icon"

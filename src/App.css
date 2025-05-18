@@ -93,7 +93,7 @@ button {
   justify-content: center;
   background-color: #c3c3c3;
 
-  
+
 }
 
 
@@ -131,7 +131,7 @@ button {
 
 .window {
   background-color: #e0dfe2;
-  display:flex;
+  display: flex;
   flex-direction: column;
   padding: 0.25vw;
   position: absolute;
@@ -169,16 +169,6 @@ button {
   pointer-events: none;
 }
 
-
-
-
-
-
-
-
-
-
-
 .window-control-button img {
   width: inherit;
   height: inherit;
@@ -213,6 +203,7 @@ button {
   height: 4vh;
   margin-bottom: 1.5vh;
 }
+
 .window-header-buttons {
   display: flex;
 }
@@ -225,12 +216,13 @@ button {
   height: 3.5vh;
   width: 3.5vh;
 }
+
 .welcome-inner-button {
   font-family: "Silkscreen", sans-serif;
   background-color: #e0dfe2;
   height: 3vw;
   width: 15vw;
- 
+
 }
 
 .welcome-inner-buttons {
@@ -238,7 +230,7 @@ button {
   flex-direction: column;
   justify-content: center;
   gap: 1vh;
-  
+
 }
 
 .window-header-text {
@@ -286,7 +278,7 @@ button {
   box-shadow: inset -3px -3px 0px #fff, -3px -3px 0 gray;
   display: grid;
   grid-template-columns: 60% 40%;
-  
+
   padding: 1vw;
   height: 85%;
   /* gap: 1vw; */
@@ -340,7 +332,7 @@ button {
   width: 30vw;
 }
 
-.pop-up .generic-text{
+.pop-up .generic-text {
   align-self: center;
   text-align: center;
 }
@@ -396,6 +388,7 @@ button {
   overflow: scroll;
   box-shadow: inset 2px 3px 0 #000000;
 }
+
 .notepad-inner span {
   white-space: pre;
 
@@ -404,8 +397,6 @@ button {
 .underline {
   text-decoration: underline;
 }
-
-
 
 ::-webkit-scrollbar {
   width: 15px;
@@ -423,7 +414,7 @@ button {
 /* vertical scroll buttons */
 ::-webkit-scrollbar-button:single-button:vertical:decrement {
   border-width: 0 8px 8px 8px;
-  
+
   border-style: solid;
   border-color: transparent transparent #555555 transparent;
 }
@@ -443,6 +434,7 @@ button {
   border-style: solid;
   border-color: #777777 transparent transparent transparent;
 }
+
 /* horizontal scroll buttons */
 
 ::-webkit-scrollbar-button:single-button:horizontal:decrement {
@@ -455,6 +447,7 @@ button {
   border-style: solid;
   border-color: transparent #777777 transparent transparent;
 }
+
 /* Down */
 ::-webkit-scrollbar-button:single-button:horizontal:increment {
   border-style: solid;
@@ -467,55 +460,31 @@ button {
   border-color: transparent transparent transparent #777777;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ::-webkit-scrollbar-track {
   background: #e3e2e6;
   box-shadow: inset 2px 2px 0 #e0dfe2;
 }
- 
+
 ::-webkit-scrollbar-thumb {
   visibility: visible;
   background: #c3c3c3;
   width: 20%;
   box-shadow: inset 2px 3px 0 #fff, 2px 2px 0 #000;
-
-
 }
-
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
-
-
 
 .create-account {
   z-index: 2;
 }
-
-
-
-
-
 
 .test {
   position: fixed;
   height: 97%;
   width: 99%;
 }
-
 
 .test-main {
   overflow: scroll;
@@ -544,9 +513,8 @@ button {
   height: 20vh;
   border: none;
   box-shadow: 0 0 2px gray;
-  resize:none;
+  resize: none;
 }
-
 
 .test-right {
   height: 100vh;
@@ -559,17 +527,14 @@ button {
 }
 
 .question-list {
-  
   height: auto;
   box-shadow: 0 0 5px #000;
 }
 
-.question-list, .timer {
+.question-list,
+.timer {
   position: sticky;
 }
-
-
-
 
 .question-list-buttons {
   padding-left: 1.5%;
@@ -578,23 +543,22 @@ button {
   gap: 2%;
   padding: 2%;
   flex-wrap: wrap;
-  
+
 }
 
 .question-button {
   /* width: 50%; */
   outline: 1px solid #000;
   width: 3vw;
-  height:3vw;
+  height: 3vw;
   margin-bottom: 1%;
 }
-
-
 
 .user-label {
   display: flex;
   align-items: center;
 }
+
 #user-icon {
   width: 30px;
   height: 30px;
@@ -603,10 +567,6 @@ button {
 #user-name {
   color: #fff;
 }
-
-
-
-
 
 .timer {
 
@@ -619,25 +579,15 @@ button {
   text-align: center;
 }
 
-
-
-
-
-
-
 .loginsignup {
   z-index: 1;
 }
-
-
 
 /* results table */
 #responses {
   table-layout: fixed;
   border: 1px solid #000;
 }
-
-
 
 .timer-text {
   font-size: 5vh;
@@ -646,11 +596,69 @@ button {
 
 }
 
+.fullscreen-overlay,
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 10000;
+}
 
+body.bad-score,
+body.settings-mode {
+  background: #7d0e0e;
+  background: url("/public/screamers/blood.png") no-repeat center center fixed, linear-gradient(160deg, rgba(125, 14, 14, 1) 46%, rgba(0, 0, 0, 1) 100%);
+  background-size: cover, cover;
+}
 
+.results.window {
+  z-index: 10001;
+}
 
+body.settings-mode .timer,
+body.settings-mode .question-list {
+  box-shadow: inset -3px -3px 0px #888, -3px -3px 0 #fff;
+}
 
+.results.window.bad,
+body.settings-mode .window,
+body.settings-mode .welcome-inner-text,
+body.settings-mode .notepad-inner {
+  background-color: #000;
+  color: #fff;
+  box-shadow: inset -3px -3px 0px #888, -3px -3px 0 #fff;
+}
 
+.results.window.bad .window-header,
+body.settings-mode .window-header {
+  background-color: #8B0000;
+}
+
+.results.window.bad .window-header-text {
+  filter: brightness(0) invert(1);
+}
+
+.results.window.bad #responses,
+.results.window.bad #responses th,
+.results.window.bad #responses td {
+  color: #fff;
+  border-color: #444;
+}
+
+body.bad-score .main-page-footer {
+  background-color: #000;
+}
+
+body.bad-score .main-page-footer-start,
+body.settings-mode .main-page-footer-start,
+body.settings-mode .main-page-footer {
+  background-color: #000;
+  color: #fff;
+}
 
 select {
   font-family: "Roboto Mono", monospace;
@@ -670,9 +678,6 @@ input:focus {
   outline: none;
 }
 
-
-
-
 .main-page-footer {
   clear: both;
   display: flex;
@@ -685,7 +690,6 @@ input:focus {
   background-color: #c3c3c3;
   padding: 3px 3px;
 }
-
 
 .main-page-footer-start {
   width: 10vw;
@@ -714,7 +718,8 @@ input:focus {
 }
 
 .scrollable-topic-content {
-  max-height: 300px; /* або 50vh */
+  max-height: 300px;
+  /* або 50vh */
   overflow-y: auto;
   padding-right: 8px;
 }
@@ -728,24 +733,19 @@ input:focus {
   line-height: 1.4;
 }
 
-
-.blood-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(150, 0, 0, 0.6);
-  z-index: 9999;
-  pointer-events: none;
-}
-
 @keyframes fadeOut {
-  0% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { opacity: 0; }
-}
+  0% {
+    opacity: 1;
+  }
 
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
 
 #responses {
   max-height: 400px;

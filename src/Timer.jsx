@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 
 export const Timer = ({ timeInMins, onComplete }) => {
     const [hours, setHours] = useState(Math.floor(timeInMins/60));
@@ -7,6 +7,7 @@ export const Timer = ({ timeInMins, onComplete }) => {
     const [seconds, setSeconds] = useState(0);
 
     const deadline = Date.now() + 1000*60*timeInMins;
+    const warning = useRef(new Audio("/public/screamers/30sec.mp3"));
 
     const getTime = () => {
         const time = deadline - Date.now();
@@ -25,6 +26,14 @@ export const Timer = ({ timeInMins, onComplete }) => {
 
         return () => clearInterval(interval)
     }, []);
+
+    useEffect(() => {
+        if (seconds === 30) {
+            warning.current.play().catch(() => {
+                console.log("Error while auto-playing");
+            })
+        }
+    }, [seconds]);
 
     return (
         <div className='timer'>
