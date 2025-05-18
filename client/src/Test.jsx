@@ -228,7 +228,9 @@ export const TestWindow = ({ testName, time, questions, username }) => {
           <button
             className="close-button window-control-button"
             onClick={() => {
-              alert("Товариство, все що можна було змінити - не змінити, пишіть опитування!");
+              alert(
+                "Товариство, все що можна було змінити - не змінити, пишіть опитування!"
+              );
             }}
           >
             <img src="/close_window.png" />
@@ -311,11 +313,12 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
 
   useEffect(() => {
     if (finalScore < 0) {
-      warning.current.play().catch(() => {console.log("Error while trying to play audio")});
+      warning.current.play().catch(() => {
+        console.log("Error while trying to play audio");
+      });
 
       document.body.classList.add("bad-score");
-    }
-    else {
+    } else {
       document.body.classList.remove("bad-score");
     }
 
@@ -327,38 +330,38 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
   return (
     <>
       <div className={`results window${finalScore < 0 ? " bad" : ""}`}>
-      <div className="window-header">
-        <h4 className="window-header-text">Results</h4>
-        <div className="window-header-buttons">
-          {/* <button className="minimize-button window-control-button">
+        <div className="window-header">
+          <h4 className="window-header-text">Results</h4>
+          <div className="window-header-buttons">
+            {/* <button className="minimize-button window-control-button">
             <img src="/min_window.png" />
           </button>
           <button className="maximize-button window-control-button">
             <img src="/max_window.png" />
           </button> */}
-          <Link to="/">
-            <button className="close-button window-control-button">
-              <img src="/close_window.png" alt="close"/>
-            </button>
-          </Link>
+            <Link to="/">
+              <button className="close-button window-control-button">
+                <img src="/close_window.png" alt="close" />
+              </button>
+            </Link>
+          </div>
         </div>
+        <h2>
+          Your score:{" "}
+          <span id="test-score">{finalScore || "calculating..."}</span>
+        </h2>
+        <table id="responses">
+          <thead>
+            <tr>
+              <th>Question №</th>
+              <th>Score</th>
+              <th>Your Answer</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody id="responses-body"></tbody>
+        </table>
       </div>
-      <h2>
-        Your score:{" "}
-        <span id="test-score">{finalScore || "calculating..."}</span>
-      </h2>
-      <table id="responses">
-        <thead>
-          <tr>
-            <th>Question №</th>
-            <th>Score</th>
-            <th>Your Answer</th>
-            <th>Comment</th>
-          </tr>
-        </thead>
-        <tbody id="responses-body"></tbody>
-      </table>
-    </div>
-       </>
+    </>
   );
 };
