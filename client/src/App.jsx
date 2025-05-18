@@ -276,7 +276,7 @@ const App = () => {
                   
                   const response = await fetch(
                     // `http://localhost:3000/api/${endpoint}`,
-                    `${baseUrl}/api/${endpoint}`,
+                    `/api/${endpoint}`,
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
