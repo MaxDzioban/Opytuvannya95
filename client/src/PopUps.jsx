@@ -4,7 +4,6 @@ import { Transition } from "react-transition-group";
 
 export const LogInSignUpWindow = ({ onSignUpClick, onLogInClick, onClose }) => {
   return (
-    
     <div className="loginsignup window">
       <div className="window-header">
         <h4 className="window-header-text">Hello</h4>
@@ -21,11 +20,11 @@ export const LogInSignUpWindow = ({ onSignUpClick, onLogInClick, onClose }) => {
             <img src="/close_window.png" />
           </button> */}
           <button
-                  className="close-button window-control-button"
-                  onClick={onClose}
-                >
-                  <img src="/close_window.png" alt="Close" />
-                </button>
+            className="close-button window-control-button"
+            onClick={onClose}
+          >
+            <img src="/close_window.png" alt="Close" />
+          </button>
         </div>
       </div>
       <div className="window-text">
@@ -66,11 +65,11 @@ export const CreateAccountWindow = ({ loginHandler, isLoginMode, onClose }) => {
             <img src="/close_window.png" />
           </button> */}
           <button
-          className="close-button window-control-button"
-          onClick={onClose}
-        >
-          <img src="/close_window.png" alt="Close" />
-        </button>
+            className="close-button window-control-button"
+            onClick={onClose}
+          >
+            <img src="/close_window.png" alt="Close" />
+          </button>
         </div>
       </div>
       <div className="window-text">
@@ -93,7 +92,13 @@ export const CreateAccountWindow = ({ loginHandler, isLoginMode, onClose }) => {
   );
 };
 
-export const PopUpWindow = ({ isOpen = true, title, text, clickHandler , onClose}) => {
+export const PopUpWindow = ({
+  isOpen = true,
+  title,
+  text,
+  clickHandler,
+  onClose,
+}) => {
   // fix this transition please...
   return (
     <Transition in={isOpen} timeout={500} unmountOnExit={true}>
@@ -120,7 +125,6 @@ export const PopUpWindow = ({ isOpen = true, title, text, clickHandler , onClose
                 >
                   <img src="/close_window.png" alt="Close" />
                 </button>
-
               </div>
             </div>
             <div className="window-text">{text}</div>
