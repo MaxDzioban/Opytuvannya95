@@ -7,6 +7,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -16,11 +17,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // --- MongoDB ---
 const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri, {
+  tls: true,
   serverApi: {
     version: ServerApiVersion.v1
     // ❌ Забрати ці: strict: true, deprecationErrors: true
@@ -165,6 +167,10 @@ app.get("/api/user/:username", async (req, res) => {
 const clientBuildPath = path.join(__dirname, "client-build");
 
 app.use(express.static(clientBuildPath));
+
+app.get("/robots.txt", (req, res) => {
+  res.sendFile(path.join(clientBuildPath, "robots.txt"));
+});
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(clientBuildPath, "index.html"));
