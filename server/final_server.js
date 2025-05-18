@@ -7,7 +7,6 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -24,9 +23,9 @@ const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri, {
   tls: true,
   serverApi: {
-    version: ServerApiVersion.v1
+    version: ServerApiVersion.v1,
     // ❌ Забрати ці: strict: true, deprecationErrors: true
-  }
+  },
 });
 
 let db, users, logs;
@@ -66,7 +65,7 @@ app.post("/api/evaluate", async (req, res) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
@@ -114,7 +113,13 @@ app.post("/api/login", async (req, res) => {
 app.post("/api/log", async (req, res) => {
   const { username, question, answer, score } = req.body;
   try {
-    await logs.insertOne({ username, question, answer, score, timestamp: new Date() });
+    await logs.insertOne({
+      username,
+      question,
+      answer,
+      score,
+      timestamp: new Date(),
+    });
     res.json({ status: "ok" });
   } catch (err) {
     res.status(500).json({ error: "Logging failed" });
@@ -163,7 +168,6 @@ app.get("/api/user/:username", async (req, res) => {
   }
 });
 
-
 const clientBuildPath = path.join(__dirname, "client-build");
 
 app.use(express.static(clientBuildPath));
@@ -176,7 +180,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(clientBuildPath, "index.html"));
 });
 
-
 // --- Запуск ---
 async function startServer() {
   try {
@@ -186,7 +189,9 @@ async function startServer() {
     logs = db.collection("logs");
 
     app.listen(PORT, () => {
-      console.log(`✅ Уніфікований сервер запущено на http://localhost:${PORT}`);
+      console.log(
+        `✅ Уніфікований сервер запущено на http://localhost:${PORT}`
+      );
     });
   } catch (err) {
     console.error("❌ MongoDB connection failed:", err);
