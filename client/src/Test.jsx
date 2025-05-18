@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Timer } from "./Timer.jsx";
@@ -11,7 +11,7 @@ export const SelectTestWindow = ({ clickHandler, username }) => {
   useEffect(() => {
     async function loadAllQuestions() {
       try {
-        const res = await fetch("http://localhost:3000/api/questions");
+        const res = await fetch("/api/questions");
         const data = await res.json();
         const grouped = {};
         data.forEach((q) => {
@@ -68,20 +68,20 @@ export const SelectTestWindow = ({ clickHandler, username }) => {
             <h4 className="window-header-text">Topic Selection</h4>
             <div className="window-header-buttons">
               <button className="minimize-button window-control-button">
-                <img src="/min_window.png" />
+                <img src="/min_window.png" alt="minimize window" />
               </button>
               <button className="maximize-button window-control-button">
-                <img src="/max_window.png" />
+                <img src="/max_window.png" alt="maximize window" />
               </button>
               <Link to="/">
                 <button className="close-button window-control-button">
-                  <img src="/close_window.png" />
+                  <img src="/close_window.png" alt="close" />
                 </button>
               </Link>
             </div>
           </div>
           <h2>What will you study today?</h2>
-          <label htmlFor="topic">Topic:</label>
+          <label htmlFor="topic-select">Topic:</label>
           <select
             name="topic"
             id="topic-select"
@@ -265,6 +265,7 @@ export const TestWindow = ({ testName, time, questions, username }) => {
 
 export const ResultsWindow = ({ topic, questions, answers, username }) => {
   const [finalScore, setFinalScore] = useState(0);
+  const warning = useRef(new Audio("/osvitni_vtraty.mp3"));
 
   useEffect(() => {
     async function evaluateAnswersOnce() {
@@ -277,7 +278,7 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
         const question = questions[i];
         const answer = answers[i];
 
-        const res = await fetch("http://localhost:3000/api/evaluate", {
+        const res = await fetch("/api/evaluate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ question, answer }),
@@ -296,7 +297,7 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
       }
 
       if (username) {
-        await fetch("http://localhost:3000/api/points", {
+        await fetch("/api/points", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, delta: total }),
@@ -308,8 +309,24 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
     evaluateAnswersOnce();
   }, [questions, answers, username]);
 
+  useEffect(() => {
+    if (finalScore < 0) {
+      warning.current.play().catch(() => {console.log("Error while trying to play audio")});
+
+      document.body.classList.add("bad-score");
+    }
+    else {
+      document.body.classList.remove("bad-score");
+    }
+
+    return () => {
+      document.body.classList.remove("bad-score");
+    };
+  }, [finalScore]);
+
   return (
-    <div className="results window">
+    <>
+      <div className={`results window${finalScore < 0 ? " bad" : ""}`}>
       <div className="window-header">
         <h4 className="window-header-text">Results</h4>
         <div className="window-header-buttons">
@@ -321,7 +338,7 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
           </button> */}
           <Link to="/">
             <button className="close-button window-control-button">
-              <img src="/close_window.png" />
+              <img src="/close_window.png" alt="close"/>
             </button>
           </Link>
         </div>
@@ -342,5 +359,6 @@ export const ResultsWindow = ({ topic, questions, answers, username }) => {
         <tbody id="responses-body"></tbody>
       </table>
     </div>
+       </>
   );
 };
