@@ -270,9 +270,9 @@ const App = () => {
                   }
 
                   const endpoint = isLoginMode ? "login" : "register";
-                  const baseUrl = import.meta.env.PROD
-  ? "" // <- автоматично підставиться Heroku origin
-  : "http://localhost:3000";
+  //                 const baseUrl = import.meta.env.PROD
+  // ? "" // <- автоматично підставиться Heroku origin
+  // : "http://localhost:3000";
                   
                   const response = await fetch(
                     // `http://localhost:3000/api/${endpoint}`,
