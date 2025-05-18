@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server/final_server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "dependencies": {
     "cors": "^2.8.5",
