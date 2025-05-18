@@ -83,10 +83,18 @@ const App = () => {
     }
   }, []);
 
-  const [bloodOverlayActive, setBloodOverlayActive] = useState(false);
+  // const [bloodOverlayActive, setBloodOverlayActive] = useState(false);
+  const [settingsActive, setSettingsActive] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [points, setPoints] = useState(null);
-
+  useEffect(() => {
+    if (settingsActive) {
+      document.body.classList.add("settings-mode");
+    }
+    else {
+      document.body.classList.remove("settings-mode");
+    }
+  }, [settingsActive]);
   const [topicsPopUpIsOpen, setTopicsPopUpIsOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState(null);
   const anecdotes = [
@@ -100,7 +108,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      {bloodOverlayActive && <div className="blood-overlay"></div>}
+{/*       {bloodOverlayActive && <div className="blood-overlay"></div>} */}
       <header className="main-page-header">
         <div id="logo">
           <img className="logo-icon" src="/logoicon.png" alt="Logo" />
@@ -156,12 +164,9 @@ const App = () => {
       </header>
       <main>
         <aside className="main-page-side-bar">
-          {/* <button
+          <button
             className="main-page-side-bar-button"
-            onClick={() => {
-              setBloodOverlayActive(true);
-              setTimeout(() => setBloodOverlayActive(false), 4000);
-            }}
+            onClick={() => setSettingsActive(sa => !sa)}
           >
             <img
               className="side-bar-icon"
@@ -169,7 +174,7 @@ const App = () => {
               alt="Icon"
             />
             Settings
-          </button> */}
+          </button>
 
           <button
             className="main-page-side-bar-button"
@@ -265,8 +270,13 @@ const App = () => {
                   }
 
                   const endpoint = isLoginMode ? "login" : "register";
+                  const baseUrl = import.meta.env.PROD
+  ? "" // <- автоматично підставиться Heroku origin
+  : "http://localhost:3000";
+                  
                   const response = await fetch(
-                    `http://localhost:3000/api/${endpoint}`,
+                    // `http://localhost:3000/api/${endpoint}`,
+                    `${baseUrl}/api/${endpoint}`,
                     {
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
@@ -435,7 +445,7 @@ const App = () => {
               }
             }}
           >
-            <img className="start-icon" src="/bomba.png" />
+            <img className="start-icon" src="/bomba.png" alt="bomb"/>
             Start Test
           </button>
         </Link>
