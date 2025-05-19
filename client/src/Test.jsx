@@ -67,12 +67,6 @@ export const SelectTestWindow = ({ clickHandler, username }) => {
           <div className="window-header">
             <h4 className="window-header-text">Topic Selection</h4>
             <div className="window-header-buttons">
-              <button className="minimize-button window-control-button">
-                <img src="/min_window.png" alt="minimize window" />
-              </button>
-              <button className="maximize-button window-control-button">
-                <img src="/max_window.png" alt="maximize window" />
-              </button>
               <Link to="/">
                 <button className="close-button window-control-button">
                   <img src="/close_window.png" alt="close" />
