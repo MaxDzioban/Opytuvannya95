@@ -1,5 +1,3 @@
-### https://opytuvannya-95-8b6d406a2d17.herokuapp.com 
-
 ### https://opytuvannya95-app-2266729b815d.herokuapp.com
 
 # 📚 Opytuvannya95
