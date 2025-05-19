@@ -136,7 +136,7 @@ const App = () => {
             <>
               <UserIcon username={username} />
               <button
-                className="navigation-sign-in pretty-button"
+                className="navigation-sign-in"
                 onClick={() => {
                   localStorage.removeItem("username");
                   localStorage.removeItem("loggedin");
@@ -150,7 +150,7 @@ const App = () => {
             </>
           ) : (
             <button
-              className="navigation-sign-in pretty-button"
+              className="navigation-sign-in"
               onClick={() => {
                 setShowLogInSignUpScreen(true);
                 setLogInWindow(false);
