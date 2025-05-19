@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import { MongoClient, ServerApiVersion } from "mongodb";
 import fs from "fs";
 import path from "path";
+import bcrypt from "bcrypt";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +25,6 @@ const client = new MongoClient(uri, {
   tls: true,
   serverApi: {
     version: ServerApiVersion.v1,
-    // ❌ Забрати ці: strict: true, deprecationErrors: true
   },
 });
 
@@ -84,31 +84,52 @@ app.post("/api/evaluate", async (req, res) => {
   }
 });
 
-// --- MongoDB Auth / Logging / Points ---
 app.post("/api/register", async (req, res) => {
   const { username, password } = req.body;
+
+  // Валідація
+  if (typeof username !== "string" || typeof password !== "string" ||
+      !username.trim() || !password.trim()) {
+    return res.status(400).json({ error: "Invalid username or password" });
+  }
+
   try {
     const exists = await users.findOne({ username });
     if (exists) {
       res.json({ success: false, error: "User already exists" });
     } else {
-      await users.insertOne({ username, password, points: 0 });
+      const hashedPassword = await bcrypt.hash(password, 10);
+      await users.insertOne({ username, password: hashedPassword, points: 0 });
       res.json({ success: true });
     }
   } catch (err) {
+    console.error("Registration error:", err);
     res.status(500).json({ error: "Registration failed" });
   }
 });
 
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
+  // Валідація
+  if (typeof username !== "string" || typeof password !== "string") {
+    return res.status(400).json({ error: "Invalid input" });
+  }
   try {
-    const user = await users.findOne({ username, password });
-    res.json({ success: !!user });
+    const user = await users.findOne({ username });
+    if (!user) {
+      return res.json({ success: false, error: "User not found" });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.json({ success: false, error: "Incorrect password" });
+    }
+    res.json({ success: true });
   } catch (err) {
+    console.error("Login error:", err);
     res.status(500).json({ error: "Login failed" });
   }
 });
+
 
 app.post("/api/log", async (req, res) => {
   const { username, question, answer, score } = req.body;
